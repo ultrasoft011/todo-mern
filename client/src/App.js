@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+const API_BASE = "http://localhost:3001";
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [popupActive, setPopActive] = useState(false);
+  const [newTodo, setNewTodo] = useState("");
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+
+  const getTodos = () => {
+    fetch(API_BASE + "/todos")
+      .then((res) => res.json())
+      .then((data) => {
+        setTodos(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Welcome</h1>
+      <h4>Your tasks</h4>
+      <div className="todos">
+        {todos.map((todo) => (
+          <div key={todo._id}>{todo.text}</div>
+        ))}
+      </div>
     </div>
   );
 }
