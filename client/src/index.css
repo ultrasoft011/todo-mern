@@ -1,0 +1,16 @@
+.todos {
+  display: flex;
+}
+
+.complete {
+  text-decoration: line-through;
+}
+
+.checkbox {
+  width: 17px;
+  height: 17px;
+  margin-right: 16px;
+  border-radius: 999px;
+  background-color: rgb(170, 212, 154);
+  transition: 0.4s;
+}
